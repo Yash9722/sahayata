@@ -6,6 +6,14 @@ files:
     destination: /home/ubuntu/sahayata24x7
 
 hooks:
+  BeforeInstall:
+    - location: Scripts/instance_os_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+    - location: Scripts/set_permissions.sh
+      timeout: 60
+      runas: ubuntu
+
   AfterInstall:
     - location: Scripts/instance_os_dependencies.sh
       timeout: 300
