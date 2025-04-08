@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 
 files:
-  - source: sahayata24x7
+  - source: sahayata24x7/
     destination: /home/ubuntu/sahayata24x7
 
-  - source: Scripts
+  - source: Scripts/
     destination: /home/ubuntu/sahayata24x7/Scripts
 
 hooks:
