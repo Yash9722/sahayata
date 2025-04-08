@@ -1,16 +1,18 @@
 #!/bin/bash
 set -e
 
-cd /home/ubuntu/sahayata24x7
+DEPLOY_DIR="/home/ubuntu/sahayata24x7"
+REQUIREMENTS_PATH="$DEPLOY_DIR/sahayata24x7/requirements.txt"
+VENV_PATH="$DEPLOY_DIR/venv"
 
-# Only create venv if it doesn't already exist
-if [ ! -d "venv" ]; then
-  python3 -m venv venv
+# Create virtual environment if not exists
+if [ ! -d "$VENV_PATH" ]; then
+  python3 -m venv "$VENV_PATH"
 fi
 
-# Activate the virtual environment
-source venv/bin/activate
+# Activate the venv
+source "$VENV_PATH/bin/activate"
 
 # Install dependencies
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r "$REQUIREMENTS_PATH"
