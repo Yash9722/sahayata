@@ -13,10 +13,10 @@ hooks:
     - location: Scripts/python_dependencies.sh
       timeout: 300
       runas: ubuntu
-    - location: gunicorn/gunicorn.sh
+    - location: Scripts/gunicorn.sh     
       timeout: 300
       runas: ubuntu
-    - location: nginx/nginx.sh
+    - location: Scripts/nginx.sh         
       timeout: 300
       runas: ubuntu
     - location: Scripts/start_app.sh
