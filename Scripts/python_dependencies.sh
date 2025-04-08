@@ -1,41 +1,29 @@
 #!/bin/bash
 
-set -e  # Exit on any error
+set -e  # Stop on any error
+set -x  # Print each command
 
 APP_DIR="/home/ubuntu/sahayata24x7"
 VENV_DIR="$APP_DIR/venv"
 
-# Ensure the app directory exists
-if [ ! -d "$APP_DIR" ]; then
-    echo "Application directory $APP_DIR does not exist. Exiting."
-    exit 1
-fi
-
-# Ensure correct ownership
+# Fix ownership
 sudo chown -R ubuntu:ubuntu "$APP_DIR"
 
-cd "$APP_DIR"
+# Remove old venv (helps fix permission issues)
+rm -rf "$VENV_DIR"
 
-# Remove old venv if it exists to avoid permission conflicts
-if [ -d "$VENV_DIR" ]; then
-    rm -rf "$VENV_DIR"
-fi
+# Create new venv
+python3 -m venv "$VENV_DIR"
 
-# Create virtual environment
-python3 -m venv venv
-
-# Activate it
+# Activate venv
 source "$VENV_DIR/bin/activate"
 
-# Check if requirements.txt exists
+# Check for requirements.txt
 if [ ! -f "$APP_DIR/requirements.txt" ]; then
-    echo "requirements.txt not found in $APP_DIR"
-    deactivate
-    exit 1
+  echo "requirements.txt not found in $APP_DIR"
+  exit 1
 fi
 
-# Upgrade pip and install dependencies
+# Install dependencies
 pip install --upgrade pip
 pip install -r "$APP_DIR/requirements.txt"
-
-echo "Python dependencies installed successfully."
