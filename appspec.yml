@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/sahayata24x7
+
+hooks:
+  BeforeInstall:
+    - location: Scripts/instance_os_dependencies.sh
+      timeout: 300
+      runas: root
+
+  AfterInstall:
+    - location: Scripts/python_dependencies.sh
+      timeout: 300
+      runas: ubuntu
+    - location: Scripts/gunicorn.sh
+      timeout: 180
+      runas: root
+    - location: Scripts/nginx.sh
+      timeout: 180
+      runas: root
+    - location: Scripts/start_app.sh
+      timeout: 180
+      runas: ubuntu
