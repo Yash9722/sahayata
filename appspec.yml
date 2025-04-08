@@ -14,12 +14,15 @@ hooks:
     - location: Scripts/python_dependencies.sh
       timeout: 300
       runas: ubuntu
+      cwd: /home/ubuntu/sahayata24x7  # Ensure script runs in correct folder
     - location: Scripts/gunicorn.sh
       timeout: 180
       runas: root
+      cwd: /home/ubuntu/sahayata24x7
     - location: Scripts/nginx.sh
       timeout: 180
       runas: root
     - location: Scripts/start_app.sh
       timeout: 180
       runas: ubuntu
+      cwd: /home/ubuntu/sahayata24x7
