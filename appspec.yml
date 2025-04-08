@@ -20,7 +20,7 @@ hooks:
       runas: ubuntu
     - location: Scripts/python_dependencies.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
     - location: Scripts/gunicorn.sh     
       timeout: 300
       runas: ubuntu
