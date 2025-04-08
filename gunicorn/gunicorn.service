@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon for sahayata24x7
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/sahayata24x7
+ExecStart=/home/ubuntu/sahayata24x7/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/sahayata24x7/sahayata24x7.sock app:app
+
+[Install]
+WantedBy=multi-user.target
