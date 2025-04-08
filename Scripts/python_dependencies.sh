@@ -1,18 +1,23 @@
 #!/bin/bash
 set -e
 
-DEPLOY_DIR="/home/ubuntu/sahayata24x7"
-REQUIREMENTS_PATH="$DEPLOY_DIR/sahayata24x7/requirements.txt"
-VENV_PATH="$DEPLOY_DIR/venv"
+APP_DIR="/home/ubuntu/sahayata24x7"
+cd "$APP_DIR"
 
 # Create virtual environment if not exists
-if [ ! -d "$VENV_PATH" ]; then
-  python3 -m venv "$VENV_PATH"
+if [ ! -d "venv" ]; then
+  python3 -m venv venv
 fi
 
-# Activate the venv
-source "$VENV_PATH/bin/activate"
+# Activate virtual environment
+source venv/bin/activate
 
-# Install dependencies
+# Upgrade pip and install requirements
 pip install --upgrade pip
-pip install -r "$REQUIREMENTS_PATH"
+
+if [ -f "requirements.txt" ]; then
+  pip install -r requirements.txt
+else
+  echo "ERROR: requirements.txt not found in $APP_DIR"
+  exit 1
+fi
